@@ -24,7 +24,7 @@
     <nav class="navbar navbar-dark bg-transparent position-absolute w-100">
         <div class="container">
             <a class="navbar-brand fw-bold" href="index.php">
-                <i class="fas fa-rupee-sign me-2"></i>Vinimaya
+                Vinimaya
             </a>
         </div>
     </nav>
@@ -72,4 +72,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
