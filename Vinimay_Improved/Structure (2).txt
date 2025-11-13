@@ -1,0 +1,49 @@
+Vinimay_Improved/
+├── app/
+│   ├── config/
+│   │   └── database.php          # Database configuration
+│   ├── controllers/
+│   │   ├── AuthController.php    # Authentication (login, register, logout)
+│   │   ├── DashboardController.php # Dashboard with charts and stats
+│   │   ├── ExpenseController.php  # Expense CRUD operations
+│   │   └── ReportController.php   # Reports and exports (PDF, Excel)
+│   ├── models/
+│   │   ├── User.php              # User model
+│   │   ├── Expense.php           # Expense model
+│   │   ├── Category.php          # Category model
+│   │   └── Budget.php            # Budget model (for future use)
+│   ├── utils/
+│   │   ├── Auth.php              # Authentication utilities
+│   │   ├── Helpers.php           # Helper functions (formatCurrency, humanize, etc.)
+│   │   └── Validation.php        # Validation utilities
+│   └── views/
+│       ├── auth/
+│       │   ├── login.php         # Login page
+│       │   └── register.php      # Registration page
+│       ├── dashboard/
+│       │   └── index.php         # Main dashboard with charts
+│       ├── expenses/
+│       │   ├── add.php           # Add expense form
+│       │   ├── edit.php          # Edit expense form
+│       │   └── list.php          # List all expenses
+│       ├── layouts/
+│       │   ├── footer.php        # Site footer
+│       │   ├── header.php        # HTML head and opening tags
+│       │   ├── navigation.php    # Top navigation bar
+│       │   └── sidebar.php       # Dashboard sidebar
+│       ├── partials/
+│       │   ├── alerts.php        # Flash message alerts
+│       │   └── charts.php        # Chart rendering partial
+│       └── reports/
+│           ├── index.php         # Reports page with filters
+│           └── print.php         # Print-friendly PDF view
+├── public/
+│   ├── css/
+│   │   └── style.css             # Custom styles
+│   ├── js/
+│   │   ├── app.js                # Main application JavaScript
+│   │   ├── charts.js             # Chart.js configuration
+│   │   └── expense-form.js       # Expense form functionality
+│   └── index.php                 # Entry point (router)
+├── sql.txt                       # Database schema and seed data
+└── Structure.txt                 # This file

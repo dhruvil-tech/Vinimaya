@@ -1,0 +1,78 @@
+-- Create database
+CREATE DATABASE IF NOT EXISTS vinimaya CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE vinimaya;
+
+-- Users table
+CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    family_size INT DEFAULT 1,
+    currency VARCHAR(10) DEFAULT 'INR',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_email (email)
+);
+
+-- Categories table
+CREATE TABLE categories (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    icon VARCHAR(50),
+    budget_default DECIMAL(10,2),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_active (is_active)
+);
+
+-- Expenses table
+CREATE TABLE expenses (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    description TEXT,
+    expense_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_user_date (user_id, expense_date),
+    INDEX idx_category (category),
+    INDEX idx_date (expense_date)
+);
+
+-- Budgets table (for future enhancement)
+CREATE TABLE budgets (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    category_id INT NOT NULL,
+    monthly_limit DECIMAL(10,2) NOT NULL,
+    current_month YEARMONTH NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories(id),
+    UNIQUE KEY unique_budget (user_id, category_id, current_month)
+);
+
+-- Insert default categories
+INSERT INTO categories (name, icon, budget_default) VALUES 
+('Rent', '🏡', 15000.00),
+('Groceries & Ration', '🛒', 5000.00),
+('Vegetables & Fruits', '🥦', 2000.00),
+('Milk & Dairy', '🥛', 1500.00),
+('Transport & Fuel', '🚗', 3000.00),
+('Utility Bills', '⚡', 2500.00),
+('Mobile & Internet', '📱', 1000.00),
+('Eating Out', '🍽️', 2000.00),
+('Medical', '🏥', 3000.00),
+('Education', '📚', 4000.00),
+('Entertainment', '🎬', 1500.00),
+('Shopping', '🛍️', 3000.00),
+('Personal Care', '💇', 1500.00),
+('Home Maintenance', '🏠', 2000.00),
+('Travel', '✈️', 5000.00),
+('Gifts & Donations', '🎁', 1000.00),
+('Investments', '📈', 10000.00),
+('Insurance', '🛡️', 3000.00),
+('Others', '📦', 2000.00);
